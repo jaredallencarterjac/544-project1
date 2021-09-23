@@ -5,9 +5,28 @@ import android.util.Log;
 import java.util.ArrayList;
 
 public class TriangleApp {
-    public String input;
-    public String output;
+    private String input;
+    private String output;
+    private String errMessage;
+    private static String INFO;
 
+    public TriangleApp(){
+        INFO = "Input the lengths of the 3 sides to your triangle: ex. 3 5 7. Press return/enter when done\n" +
+                "To stop the program press 0 to stop the program";
+    }
+    public String getInfo(){
+        return this.INFO;
+    }
+    public String runApp(){
+        return "App is running";
+    }
+    public String getErrMessage(){
+        return errMessage;
+    }
+
+    public String getInput(){
+        return this.input;
+    }
 
     public  float[] parseInput(String input)  {
         float[] sides = new float[3];
