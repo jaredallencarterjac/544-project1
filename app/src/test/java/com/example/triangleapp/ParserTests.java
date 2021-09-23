@@ -53,4 +53,16 @@ public class ParserTests {
         assertArrayEquals(expected,input1F,0.0f);
 
     }
+    @Test public void NumberOutOfRange(){
+        String input1 = "-1.0,-1000.0,-101.0";
+        String input2 ="101 1000 102";
+
+        float[] expected  = new float[]{0,0,1};
+
+        float[] input1F = ta.parseInput(input1);
+        float[] input2F = ta.parseInput(input2);
+
+        assertArrayEquals(expected,input1F,0.0f);
+        assertArrayEquals(expected,input2F,0.0f);
+    }
 }
