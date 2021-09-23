@@ -1,18 +1,15 @@
 package com.example.triangleapp;
 
-import android.util.Log;
-
-import java.util.ArrayList;
-
 public class TriangleApp {
     private String input;
     private String output;
     private String errMessage;
-    private static String INFO;
+    private final String INFO = "Input the lengths of the 3 sides to your triangle: ex. 3 5 7. Press return/enter when done\n" +
+            "To stop the program press 0 to stop the program";
+    private float[] parsedNumbers;
 
     public TriangleApp(){
-        INFO = "Input the lengths of the 3 sides to your triangle: ex. 3 5 7. Press return/enter when done\n" +
-                "To stop the program press 0 to stop the program";
+        parsedNumbers = new float[3];
     }
     public String getInfo(){
         return this.INFO;
@@ -23,48 +20,68 @@ public class TriangleApp {
     public String getErrMessage(){
         return errMessage;
     }
+    public float[] getParsedNumbers() { return parsedNumbers; }
+    @Override
+    public String toString() { return parsedNumbers[0] + " " + parsedNumbers[1] + " " + parsedNumbers[2]; }
 
     public String getInput(){
         return this.input;
     }
 
-    public  float[] parseInput(String input)  {
-        float[] sides = new float[3];
-        int index = 0;
+    public  boolean parseInput(String input)  {
         if (input.length()==1 && input.charAt(0)=='0'){
-            return new float[]{0,0,0};
+            errMessage = "Exit Code";
+            parsedNumbers = new float[3];
+            return false;
         }
         String num ="";
+        int index = 0;
         for(int i =0; i<input.length();i++){
-            if (index ==3){
-                //throw error message
+            if (index == 3){
+                errMessage = "Input contains more than 3 numbers.";
+                parsedNumbers = new float[3];
+                return false;
             }
-
-            char digit = input.charAt(i);
-            if(digit == ','||digit ==' '){
-                if(num.length() == 0){
-                    //throw error message
-
+            char currDigit = input.charAt(i);
+            if(currDigit == ','|| currDigit ==' '){
+                if (num.length() == 0){
+                    errMessage = "Invalid input";
+                    parsedNumbers = new float[3];
+                    return false;
                 }
-
-                System.out.println("Num is "+ num);
-                sides[index] = Float.parseFloat(num);
-
+                parsedNumbers[index] = Float.parseFloat(num);
+                if (parsedNumbers[index] < 1.0f) {
+                    errMessage = "An input number is less than the minimum value of 1.0";
+                    parsedNumbers = new float[3];
+                    return false;
+                }
+                else if (parsedNumbers[index] > 100.0f) {
+                    errMessage = "An input number is greater than the maximum value of 100.0";
+                    parsedNumbers = new float[3];
+                    return false;
+                }
                 num ="";
                 index++;
             }
-            else if(!Character.isDigit(digit)){
-                //throw an error message
+            else if(!Character.isDigit(currDigit) && currDigit != '.'){
+                errMessage = "Invalid input";
+                parsedNumbers = new float[3];
+                return false;
             }
             else{
-                 num= num+digit;
+                 num = num + currDigit;
             }
         }
-        sides[index] = Float.parseFloat(num);
-        return sides;
+        if (index <= 2) {
+            if (num.length() <= 0 || index < 2) {
+                errMessage = "Invalid input";
+                parsedNumbers = new float[3];
+                return false;
+            }
+            parsedNumbers[index] = Float.parseFloat(num);
+        }
+        return true;
     }
-
-
 
     public void setInput(String input){
         this.input = input;

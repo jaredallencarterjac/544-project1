@@ -1,6 +1,9 @@
 package com.example.triangleapp;
 
 import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 
 import org.junit.Before;
@@ -22,11 +25,15 @@ public class ParserTests {
         expected[1] = 4.0F;
         expected[2] = 5.0F;
 
-        float[] input1F = ta.parseInput(input1);
-        float[] input2F = ta.parseInput(input2);
+        boolean test1 = ta.parseInput(input1);
+        System.out.println(ta.toString());
+        assertArrayEquals(expected,ta.getParsedNumbers(),0.0f);
+        assertTrue(test1);
 
-        assertArrayEquals(expected,input1F,0.0f);
-        assertArrayEquals(expected,input2F,0.0f);
+        boolean test2 = ta.parseInput(input2);
+        System.out.println(ta.toString());
+        assertArrayEquals(expected,ta.getParsedNumbers(),0.0f);
+        assertTrue(test2);
     }
     @Test
     public void parse3decimals(){
@@ -38,31 +45,48 @@ public class ParserTests {
         expected[1] = 4.4F;
         expected[2] = 5.5F;
 
-        float[] input1F = ta.parseInput(input1);
-        float[] input2F = ta.parseInput(input2);
+        boolean test1 = ta.parseInput(input1);
+        System.out.println(ta.toString());
+        assertArrayEquals(expected,ta.getParsedNumbers(),0.0f);
+        assertTrue(test1);
 
-        assertArrayEquals(expected,input1F,0.0f);
-        assertArrayEquals(expected,input2F,0.0f);
+        boolean test2 = ta.parseInput(input2);
+        System.out.println(ta.toString());
+        assertArrayEquals(expected,ta.getParsedNumbers(),0.0f);
+        assertTrue(test2);
     }
 
     @Test
     public void parseExitCode(){
         String input1 = "0";
         float[] expected  = new float[]{0,0,0};
-        float[] input1F = ta.parseInput(input1);
-        assertArrayEquals(expected,input1F,0.0f);
+        //float[] input1F = ta.parseInput(input1);
+        //assertArrayEquals(expected,input1F,0.0f);
 
     }
     @Test public void NumberOutOfRange(){
         String input1 = "-1.0,-1000.0,-101.0";
         String input2 ="101 1000 102";
+        String input3 ="2 0.75 1.0";
 
-        float[] expected  = new float[]{0,0,1};
+        float[] expected  = new float[]{0f,0f,0f};
 
-        float[] input1F = ta.parseInput(input1);
-        float[] input2F = ta.parseInput(input2);
+        boolean test1 = ta.parseInput(input1);
+        System.out.println(ta.toString());
+        System.out.println(ta.getErrMessage());
+        assertArrayEquals(expected,ta.getParsedNumbers(),0.0f);
+        assertFalse(test1);
 
-        assertArrayEquals(expected,input1F,0.0f);
-        assertArrayEquals(expected,input2F,0.0f);
+        boolean test2 = ta.parseInput(input2);
+        System.out.println(ta.toString());
+        System.out.println(ta.getErrMessage());
+        assertArrayEquals(expected,ta.getParsedNumbers(),0.0f);
+        assertFalse(test2);
+
+        boolean test3 = ta.parseInput(input3);
+        System.out.println(ta.toString());
+        System.out.println(ta.getErrMessage());
+        assertArrayEquals(expected,ta.getParsedNumbers(),0.0f);
+        assertFalse(test3);
     }
 }
