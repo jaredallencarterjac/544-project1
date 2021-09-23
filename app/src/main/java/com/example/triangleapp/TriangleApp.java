@@ -7,13 +7,45 @@ import java.util.ArrayList;
 public class TriangleApp {
     public String input;
     public String output;
-    public ArrayList<Float> triangleSides ;
 
-    public  ArrayList<Float> parseInput(String input)  {
-        this.output = "output";
-        Log.i("PARSE",this.output);
-        return null;
+
+    public  float[] parseInput(String input)  {
+        float[] sides = new float[3];
+        int index = 0;
+        if (input.length()==1 && input.charAt(0)=='0'){
+            return new float[]{0,0,0};
+        }
+        String num ="";
+        for(int i =0; i<input.length();i++){
+            if (index ==3){
+                //throw error message
+            }
+
+            char digit = input.charAt(i);
+            if(digit == ','||digit ==' '){
+                if(num.length() == 0){
+                    //throw error message
+
+                }
+
+                System.out.println("Num is "+ num);
+                sides[index] = Float.parseFloat(num);
+
+                num ="";
+                index++;
+            }
+            else if(!Character.isDigit(digit)){
+                //throw an error message
+            }
+            else{
+                 num= num+digit;
+            }
+        }
+        sides[index] = Float.parseFloat(num);
+        return sides;
     }
+
+
 
     public void setInput(String input){
         this.input = input;
