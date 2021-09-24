@@ -58,10 +58,14 @@ public class ParserTests {
 
     @Test
     public void parseExitCode(){
+
         String input1 = "0";
-        float[] expected  = new float[]{0,0,0};
-        //float[] input1F = ta.parseInput(input1);
-        //assertArrayEquals(expected,input1F,0.0f);
+        float[] expectedArr  = new float[3];
+
+        boolean actual = ta.parseInput(input1);
+        assertArrayEquals(expectedArr,ta.getParsedNumbers(),0.0f);
+        assertFalse(actual);
+        assertTrue(ta.checkExit());
 
     }
     @Test public void NumberOutOfRange(){
@@ -89,4 +93,5 @@ public class ParserTests {
         assertArrayEquals(expected,ta.getParsedNumbers(),0.0f);
         assertFalse(test3);
     }
+
 }

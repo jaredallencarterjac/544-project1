@@ -4,12 +4,15 @@ public class TriangleApp {
     private String input;
     private String output;
     private String errMessage;
+    private boolean isExit;
+
     private final String INFO = "Input the lengths of the 3 sides to your triangle: ex. 3 5 7. Press return/enter when done\n" +
             "To stop the program press 0 to stop the program";
     private float[] parsedNumbers;
 
     public TriangleApp(){
         parsedNumbers = new float[3];
+        isExit =false;
     }
     public String getInfo(){
         return this.INFO;
@@ -28,10 +31,15 @@ public class TriangleApp {
         return this.input;
     }
 
+    public boolean checkExit(){
+        return isExit;
+    }
+
     public  boolean parseInput(String input)  {
         if (input.length()==1 && input.charAt(0)=='0'){
             errMessage = "Exit Code";
             parsedNumbers = new float[3];
+            this.isExit = true;
             return false;
         }
         String num ="";

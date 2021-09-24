@@ -41,6 +41,14 @@ public class MainActivity extends AppCompatActivity {
               input = inputText.getText().toString();
               Log.i("INFO",input);
               //String output;
+              //triangle.checkExit()
+                      if(triangleApp.checkExit()){
+                          //exit
+
+                      }
+                      else{
+                          //run here
+                      }
               //run app here
               //output = triangleApp.runApp();
               //update message box here
