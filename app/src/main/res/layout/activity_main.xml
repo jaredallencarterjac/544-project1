@@ -11,7 +11,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="24dp"
-        android:hint="@string/inputText"/>
+        android:hint="@string/inputText"
+        android:singleLine="true"/>
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"

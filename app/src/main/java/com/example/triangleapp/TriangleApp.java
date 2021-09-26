@@ -34,7 +34,13 @@ public class TriangleApp {
     public boolean checkExit(){
         return isExit;
     }
-
+    public void setInput(String input){
+        this.input = input;
+    }
+    public String getOutput(){
+        String output = this.output;
+        return output;
+    }
     public  boolean parseInput(String input)  {
         if (input.length()==1 && input.charAt(0)=='0'){
             errMessage = "Exit Code";
@@ -82,7 +88,7 @@ public class TriangleApp {
         }
         if (index <= 2) {
             if (num.length() <= 0 || index < 2) {
-                errMessage = "Invalid input";
+                errMessage = "Invalid input contains less than 3 inputs";
                 parsedNumbers = new float[3];
                 return false;
             }
@@ -91,12 +97,5 @@ public class TriangleApp {
         return true;
     }
 
-    public void setInput(String input){
-        this.input = input;
-    }
-    public String getOutput(){
-        String output = this.output;
 
-        return output;
-    }
 }

@@ -68,6 +68,7 @@ public class ParserTests {
         assertTrue(ta.checkExit());
 
     }
+
     @Test public void NumberOutOfRange(){
         String input1 = "-1.0,-1000.0,-101.0";
         String input2 ="101 1000 102";
@@ -93,5 +94,47 @@ public class ParserTests {
         assertArrayEquals(expected,ta.getParsedNumbers(),0.0f);
         assertFalse(test3);
     }
+    @Test
+    public void lessThan3Inputs(){
+        System.out.println("Less than 3 inputs:");
+        String input1 = "1 2.0";
+        String input2 = "2";
+        float[] expected  = new float[3];
+
+        boolean test1 = ta.parseInput(input1);
+        System.out.println(ta.toString());
+        System.out.println(ta.getErrMessage());
+        assertArrayEquals(expected,ta.getParsedNumbers(),0.0f);
+        assertFalse(test1);
+
+        boolean test2 = ta.parseInput(input2);
+        System.out.println(ta.toString());
+        System.out.println(ta.getErrMessage());
+        assertArrayEquals(expected,ta.getParsedNumbers(),0.0f);
+        assertFalse(test2);
+
+    }
+
+    @Test
+    public void moreThan3Inputs(){
+        System.out.println("more than 3 inputs:");
+        String input1 = "1 2 3 4";
+        String input2 = "1.0,2.0,3.0,4.0,5.0";
+
+        float[] expected  = new float[3];
+
+        boolean test1 = ta.parseInput(input1);
+        System.out.println(ta.toString());
+        System.out.println(ta.getErrMessage());
+        assertArrayEquals(expected,ta.getParsedNumbers(),0.0f);
+        assertFalse(test1);
+
+        boolean test2 = ta.parseInput(input2);
+        System.out.println(ta.toString());
+        System.out.println(ta.getErrMessage());
+        assertArrayEquals(expected,ta.getParsedNumbers(),0.0f);
+        assertFalse(test2);
+    }
+
 
 }

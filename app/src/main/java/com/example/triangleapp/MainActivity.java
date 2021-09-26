@@ -40,19 +40,24 @@ public class MainActivity extends AppCompatActivity {
               String input;
               input = inputText.getText().toString();
               Log.i("INFO",input);
-              //String output;
-              //triangle.checkExit()
-                      if(triangleApp.checkExit()){
-                          //exit
+              //Pass in input here
+              boolean validInput = triangleApp.parseInput(input);
+              if(!validInput){
+                  //Display error message here
+                  Log.i("INFO",String.valueOf(triangleApp.checkExit()));
+                  if(triangleApp.checkExit()){
+                      //exit android app
+                      finish();
+                      System.exit(0);
+                  }
+              }else{
+                  //triangle.checkExit()
+                  // run app here
+                  //output = triangleApp.runApp();
+                  //update message box here
+                  // messageText.setText(output);
+              }
 
-                      }
-                      else{
-                          //run here
-                      }
-              //run app here
-              //output = triangleApp.runApp();
-              //update message box here
-              // messageText.setText(output);
           }
         });
 
