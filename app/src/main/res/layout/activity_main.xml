@@ -11,18 +11,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="24dp"
-        android:hint="@string/inputText"
-        android:singleLine="true"/>
+        android:singleLine="true"
+        android:imeOptions="actionDone"
+        android:hint="@string/inputText"/>
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/buttonText"/>
     <TextView
-        android:id="@+id/text_view"
+        android:id="@+id/text_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="24dp"
         android:text="@string/messageText"/>
+    <TextView
+        android:id="@+id/text_output"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="24dp"
+        android:visibility="invisible"/>
 
 </LinearLayout>

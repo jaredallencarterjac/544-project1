@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -12,7 +13,8 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
     private Button button;
     private EditText inputText;
-    private TextView messageText;
+    private TextView infoText;
+    private TextView outputText;
     private TriangleApp triangleApp;
 
 
@@ -25,39 +27,37 @@ public class MainActivity extends AppCompatActivity {
 
         //initialize widgets below
         //the R.id.{variable name} values are in activity_main.xml
-        messageText = (TextView)findViewById(R.id.text_view);
         button = (Button) findViewById(R.id.button);
+        infoText = (TextView)findViewById(R.id.text_info);
         inputText = (EditText)findViewById(R.id.edit_text);
-
-        //set initial info message
-        messageText.setText(triangleApp.getInfo());
+        outputText = (TextView)findViewById(R.id.text_output);
 
         //set up onclick for button
         button.setOnClickListener( new View.OnClickListener(){
           @Override
           public void onClick(View v){
-              //get input string
-              String input;
-              input = inputText.getText().toString();
-              Log.i("INFO",input);
-              //Pass in input here
-              boolean validInput = triangleApp.parseInput(input);
-              if(!validInput){
-                  //Display error message here
-                  Log.i("INFO",String.valueOf(triangleApp.checkExit()));
-                  if(triangleApp.checkExit()){
-                      //exit android app
+              // Close virtual keyboard
+              inputText.onEditorAction(EditorInfo.IME_ACTION_DONE);
+              String input = inputText.getText().toString();
+              // run app
+              boolean success = triangleApp.runApp(input);
+              // Edge case, app exit
+              if(triangleApp.checkExit()) {
+                  infoText.setText("The End");
+                  outputText.setVisibility(View.INVISIBLE);
                       finish();
                       System.exit(0);
-                  }
-              }else{
-                  //triangle.checkExit()
-                  // run app here
-                  //output = triangleApp.runApp();
-                  //update message box here
-                  // messageText.setText(output);
               }
-
+              else if(success) {
+                  outputText.setText(triangleApp.getOutput());
+                  outputText.setTextColor(getResources().getColor(R.color.blue));
+                  outputText.setVisibility(View.VISIBLE);
+              }
+              else {
+                  outputText.setTextColor(getResources().getColor(R.color.red));
+                  outputText.setText(triangleApp.getErrMessage());
+                  outputText.setVisibility(View.VISIBLE);
+              }
           }
         });
 
