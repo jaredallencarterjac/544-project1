@@ -5,12 +5,14 @@ public class TriangleApp {
     private String output;
     private String errMessage;
     private boolean isExit;
+    Triangle triangle;
 
     private final String INFO = "Input the lengths of the 3 sides to your triangle: ex. 3 5 7. Press return/enter when done\n" +
             "To stop the program press 0 to stop the program";
     private float[] parsedNumbers;
 
     public TriangleApp(){
+        Triangle triangle = new Triangle();
         parsedNumbers = new float[3];
         isExit =false;
     }
@@ -18,7 +20,11 @@ public class TriangleApp {
         return this.INFO;
     }
     public String runApp(){
-        return "App is running";
+        if(!triangle.validTriangle(parsedNumbers)) {
+            return "The sum of any two sides must be greater than the third.";
+        }
+        return triangle.triangleType(parsedNumbers);
+
     }
     public String getErrMessage(){
         return errMessage;
