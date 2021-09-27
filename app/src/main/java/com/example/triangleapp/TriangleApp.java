@@ -67,25 +67,32 @@ public class TriangleApp {
         int index = 0;
         for(int i =0; i<input.length();i++){
             if (index == 3){
-                errMessage = "Input contains more than 3 numbers.";
+                errMessage = "Input contains more than 3 numbers. \nTry again.";
                 parsedNumbers = new float[3];
                 return false;
             }
             char currDigit = input.charAt(i);
             if(currDigit == ','|| currDigit ==' '){
                 if (num.length() == 0){
-                    errMessage = "Invalid input";
+                    errMessage = "Invalid input. \nTry again.";
                     parsedNumbers = new float[3];
                     return false;
                 }
-                parsedNumbers[index] = Float.parseFloat(num);
+                try {
+                    parsedNumbers[index] = Float.parseFloat(num);
+                }
+                catch(Exception e) {
+                    errMessage = "Invalid input. \nTry again.";
+                    parsedNumbers = new float[3];
+                    return false;
+                }
                 if (parsedNumbers[index] < 1.0f) {
-                    errMessage = "An input number is less than the minimum value of 1.0";
+                    errMessage = "An input number is less than the minimum value of 1.0. \nTry again.";
                     parsedNumbers = new float[3];
                     return false;
                 }
                 else if (parsedNumbers[index] > 100.0f) {
-                    errMessage = "An input number is greater than the maximum value of 100.0";
+                    errMessage = "An input number is greater than the maximum value of 100.0. \nTry again.";
                     parsedNumbers = new float[3];
                     return false;
                 }
@@ -93,12 +100,12 @@ public class TriangleApp {
                 index++;
             }
             else if (currDigit == '-' && num.length() == 0) {
-                errMessage = "An input number is less than the minimum value of 1.0";
+                errMessage = "An input number is less than the minimum value of 1.0. \nTry again.";
                 parsedNumbers = new float[3];
                 return false;
             }
             else if(!Character.isDigit(currDigit) && currDigit != '.') {
-                errMessage = "Invalid input";
+                errMessage = "Invalid input. \nTry again.";
                 parsedNumbers = new float[3];
                 return false;
             }
@@ -108,11 +115,18 @@ public class TriangleApp {
         }
         if (index <= 2) {
             if (num.length() <= 0 || index < 2) {
-                errMessage = "Invalid input contains less than 3 inputs";
+                errMessage = "Invalid input contains less than 3 inputs. \nTry again.";
                 parsedNumbers = new float[3];
                 return false;
             }
-            parsedNumbers[index] = Float.parseFloat(num);
+            try {
+                parsedNumbers[index] = Float.parseFloat(num);
+            }
+            catch(Exception e) {
+                errMessage = "Invalid input. \nTry again.";
+                parsedNumbers = new float[3];
+                return false;
+            }
         }
         return true;
     }
