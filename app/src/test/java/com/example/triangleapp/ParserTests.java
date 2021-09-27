@@ -136,5 +136,26 @@ public class ParserTests {
         assertFalse(test2);
     }
 
+    @Test
+    public void nonNumberInputs() {
+        System.out.println("more than 3 inputs:");
+        String input1 = "1,1,1...";
+        String input2 = "hjewnjkdkjnjkq";
+
+        float[] expected  = new float[3];
+
+        boolean test1 = ta.parseInput(input1);
+        System.out.println(ta.toString());
+        System.out.println(ta.getErrMessage());
+        assertArrayEquals(expected,ta.getParsedNumbers(),0.0f);
+        assertFalse(test1);
+
+        boolean test2 = ta.parseInput(input2);
+        System.out.println(ta.toString());
+        System.out.println(ta.getErrMessage());
+        assertArrayEquals(expected,ta.getParsedNumbers(),0.0f);
+        assertFalse(test2);
+    }
+
 
 }
