@@ -45,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
               if(triangleApp.checkExit()) {
                   infoText.setText("The End");
                   outputText.setVisibility(View.INVISIBLE);
+                      finish();
+                      System.exit(0);
               }
               else if(success) {
                   outputText.setText(triangleApp.getOutput());
@@ -52,8 +54,8 @@ public class MainActivity extends AppCompatActivity {
                   outputText.setVisibility(View.VISIBLE);
               }
               else {
-                  outputText.setText(triangleApp.getErrMessage());
                   outputText.setTextColor(getResources().getColor(R.color.red));
+                  outputText.setText(triangleApp.getErrMessage());
                   outputText.setVisibility(View.VISIBLE);
               }
           }
