@@ -1,25 +1,38 @@
 package com.example.triangleapp;
 
+import android.util.Log;
+
+import java.util.Arrays;
+
 public class TriangleApp {
     private String input;
     private String output;
     private String errMessage;
     private boolean isExit;
+    private Triangle triangle;
 
-    private final String INFO = "Input the lengths of the 3 sides to your triangle: ex. 3 5 7. Press return/enter when done\n" +
-            "To stop the program press 0 to stop the program";
     private float[] parsedNumbers;
 
     public TriangleApp(){
+        triangle = new Triangle();
         parsedNumbers = new float[3];
-        isExit =false;
+        isExit = false;
     }
-    public String getInfo(){
-        return this.INFO;
+
+    public boolean runApp(String input) {
+        if(parseInput(input)) {
+            Log.i("INFO", Arrays.toString(parsedNumbers));
+            if(!triangle.validTriangle(parsedNumbers)) { // valid input, but triangle inequality theorem violated
+                errMessage = "The sum of any two sides must be greater than the third.";
+            }
+            else {  // valid input, set output to triangle type
+                output = triangle.triangleType(parsedNumbers);
+                return true;
+            }
+        }
+        return false;
     }
-    public String runApp(){
-        return "App is running";
-    }
+
     public String getErrMessage(){
         return errMessage;
     }
@@ -97,6 +110,6 @@ public class TriangleApp {
     public String getOutput(){
         String output = this.output;
 
-        return output;
+        return this.output;
     }
 }
