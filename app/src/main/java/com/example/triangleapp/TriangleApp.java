@@ -23,7 +23,7 @@ public class TriangleApp {
         if(parseInput(input)) {
             Log.i("INFO", Arrays.toString(parsedNumbers));
             if(!triangle.validTriangle(parsedNumbers)) { // valid input, but triangle inequality theorem violated
-                errMessage = "The sum of any two sides must be greater than the third.";
+                errMessage = "Invalid triangle. The sum of any two sides must be greater than the third.\n Try again.";
             }
             else {  // valid input, set output to triangle type
                 output = triangle.triangleType(parsedNumbers);
@@ -54,6 +54,8 @@ public class TriangleApp {
         String output = this.output;
         return output;
     }
+
+
     public  boolean parseInput(String input)  {
         if (input.length()==1 && input.charAt(0)=='0'){
             errMessage = "Exit Code";
@@ -90,7 +92,12 @@ public class TriangleApp {
                 num ="";
                 index++;
             }
-            else if(!Character.isDigit(currDigit) && currDigit != '.'){
+            else if (currDigit == '-' && num.length() == 0) {
+                errMessage = "An input number is less than the minimum value of 1.0";
+                parsedNumbers = new float[3];
+                return false;
+            }
+            else if(!Character.isDigit(currDigit) && currDigit != '.') {
                 errMessage = "Invalid input";
                 parsedNumbers = new float[3];
                 return false;
