@@ -21,10 +21,4 @@ public class ExampleUnitTest {
         assertEquals(4, 2 + 2);
     }
 
-    @Test
-    public void test_setInput(){
-        ta.setInput("test");
-        assertEquals("test",ta.getInput());
-    }
-
 }

@@ -5,7 +5,6 @@ import android.util.Log;
 import java.util.Arrays;
 
 public class TriangleApp {
-    private String input;
     private String output;
     private String errMessage;
     private boolean isExit;
@@ -19,6 +18,11 @@ public class TriangleApp {
         isExit = false;
     }
 
+    /**
+     * Runs the app by calling appropriate functions
+     * @param input the user input from the text box
+     * @return boolean stating whether the input is valid or not
+     */
     public boolean runApp(String input) {
         if(parseInput(input)) {
             Log.i("INFO", Arrays.toString(parsedNumbers));
@@ -33,29 +37,53 @@ public class TriangleApp {
         return false;
     }
 
+    /**
+     * Returns the value of the String errMessage variable
+     * @return errMessage
+     */
     public String getErrMessage(){
         return errMessage;
     }
-    public float[] getParsedNumbers() { return parsedNumbers; }
-    @Override
-    public String toString() { return parsedNumbers[0] + " " + parsedNumbers[1] + " " + parsedNumbers[2]; }
 
-    public String getInput(){
-        return this.input;
+    /**
+     * Returns the value of the float array parsedNumbers variable
+     * @return parsedNumbers
+     */
+    public float[] getParsedNumbers() {
+        return parsedNumbers;
     }
 
+    /**
+     * Overrides toString method to print the value of the parsed numbers from the user input
+     * @return the contents of the parsedNumbers array
+     */
+    @Override
+    public String toString() {
+        return parsedNumbers[0] + " " + parsedNumbers[1] + " " + parsedNumbers[2];
+    }
+
+    /**
+     * Returns the value of the String output variable
+     * @return output
+     */
+    public String getOutput() {
+        return this.output;
+    }
+
+    /**
+     * Returns the value of the boolean isExit variable
+     * @return isExit
+     */
     public boolean checkExit(){
         return isExit;
     }
-    public void setInput(String input){
-        this.input = input;
-    }
-    public String getOutput(){
-        String output = this.output;
-        return output;
-    }
 
-
+    /**
+     * Parses the input provided by the user to check if it is a valid input and
+     * assigns these values to the parsedNumbers float array
+     * @param input the String input provided by the user
+     * @return boolean stating if the input is valid or not
+     */
     public  boolean parseInput(String input)  {
         if (input.length()==1 && input.charAt(0)=='0'){
             errMessage = "Exit Code";

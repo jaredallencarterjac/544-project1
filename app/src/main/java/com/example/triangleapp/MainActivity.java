@@ -18,6 +18,10 @@ public class MainActivity extends AppCompatActivity {
     private TriangleApp triangleApp;
 
 
+    /**
+     * Runs the application user interface
+     * @param savedInstanceState the instance state
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
